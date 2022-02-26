@@ -1,4 +1,4 @@
-import api.hiscores.OsrsApi;
+import api.osrs.OsrsApi;
 
 public class testCommandLauncher {
 
