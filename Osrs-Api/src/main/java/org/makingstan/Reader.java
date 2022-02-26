@@ -69,53 +69,26 @@ public class Reader {
             return null;
         }
     }
+    
+    
 
     //we get this data from prices.runescape.wiki they collect realtime data from runelite clients. so it's extremely accurate
     public static String getRawRealTimeGeData(int itemId) throws Exception
     {
-        // no need to parse this data because it's already parsed with the json inside.
-        URL url = new URL("https://prices.runescape.wiki/api/v1/osrs/latest?id=" + itemId);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        getRawData("https://prices.runescape.wiki/api/v1/osrs/latest?id=", itemId);
 
-        //specify get request
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-
-        int responseCode = con.getResponseCode();
-
-        //if the request is ok then we can retrieve the data
-        if (responseCode == HttpURLConnection.HTTP_OK)
-        {
-
-            //success the response code is okay
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
-
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null)
-            {
-                response.append(inputLine+" ");
-            }
-            in.close();
-
-            String responseString = response.toString();
-
-            return responseString;
-        }
-        else
-        {
-            System.out.println("GET request not worked || returned null");
-            return null;
-        }
     }
 
 
     public static String getRawGeData(int itemId) throws IOException
     {
+        getRawData("https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=", itemId);
+    }
+    
+    private String getRawData(String url, int itemId)
+    {
         // no need to parse this data because it's already parsed with the json inside.
-        URL url = new URL("https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=" + itemId);
+        URL url = new URL(url + itemId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
         //specify get request
