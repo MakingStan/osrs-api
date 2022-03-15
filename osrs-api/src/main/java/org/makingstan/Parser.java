@@ -4,6 +4,26 @@ import java.util.HashMap;
 
 public class Parser {
 
+    public static long[] parseAllRawLevelHiscoreData(String rawHiscoreData)
+    {
+        String skillsHiscoreData;
+        String[] hiscoreData;
+
+        skillsHiscoreData = removeUnnecessaryData(rawHiscoreData);
+        hiscoreData = getHiscoreDataInformation(skillsHiscoreData);
+
+        long[] longHiscoreData = new long[hiscoreData.length/2];
+
+        for(int i = 1; i < hiscoreData.length; i += 2)
+        {
+            System.out.println(Long.parseLong(hiscoreData[i]));
+            longHiscoreData[i/2] = Long.parseLong(hiscoreData[i]);
+        }
+        return longHiscoreData;
+
+
+    }
+
     public static HashMap parseRawSkillHiscoreData(String rawHiscoreData)
     {
         String skillsHiscoreData;

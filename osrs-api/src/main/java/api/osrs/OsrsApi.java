@@ -26,6 +26,16 @@ public class OsrsApi {
                 return Long.parseLong(String.valueOf(skillsHiscoreData.get("OverAllLevel")));
             }
 
+
+            public static long[] getAllLevels(String playerName, boolean isIronman, boolean isHardcoreIronman, boolean isUltimateIronman) throws IOException
+            {
+                String rawHiscoresData = Reader.getRawPlayerHiscoresData(playerName, isIronman, isHardcoreIronman, isUltimateIronman);
+                long[] skillsHiscoreData = Parser.parseAllRawLevelHiscoreData(rawHiscoresData);
+
+
+                return skillsHiscoreData;
+            }
+
             public static long getOverallRank(String playerName, boolean isIronman, boolean isHardcoreIronman, boolean isUltimateIronman) throws IOException
             {
                 String rawHiscoresData = Reader.getRawPlayerHiscoresData(playerName, isIronman, isHardcoreIronman, isUltimateIronman);
